@@ -1,9 +1,9 @@
 language: java
 deploy:
   provider: heroku
-  app: addition-multimodule-app
+  app: cricketauctionapp
   api_key:
-    secure: "4c2a2e42-7a03-442a-99dc-2ac7f7b88a44"
+    secure: "eae0ec9c-9351-41c6-98a8-1f79d584e74c"
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
