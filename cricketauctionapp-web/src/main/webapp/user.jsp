@@ -439,9 +439,9 @@ body {
 </div>
 
 <div class="navbar">
-  <a href="cricket/BestBat.jsp">BEST BATSMAN</a>
-  <a href="cricket/BestBowl.jsp">BEST BOWLER</a>
-  <a href="cricket/FindRole.jsp">FIND ROLE</a>
+  <a href="BestBat.jsp">BEST BATSMAN</a>
+  <a href="BestBowl.jsp">BEST BOWLER</a>
+  <a href="FindRole.jsp">FIND ROLE</a>
   <a href="ExperiencePlayers.jsp">EXPERIENCE PLAYERS</a>
   <a href="TeamPlayer.jsp">TEAM PLAYERS</a>
   <a href="index.jsp" class="right">LOG OUT</a>
