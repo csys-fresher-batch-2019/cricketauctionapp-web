@@ -84,4 +84,38 @@ constraint playr_id_fk foreign key(playr_id)references players(player_id),
 constraint teamm_id_fk foreign key(teamm_id)references team(team_id),
 constraint team_player_uniq unique(playr_id,teamm_id)
 );
+--function
+--1
+create or replace FUNCTION BATTING_AVERAGE_CALC(runs_scored number, not_outs number,innings number)
+RETURN NUMBER AS
+PRAGMA AUTONOMOUS_TRANSACTION; 
+batting_average number;
+times_out number;
+BEGIN
+times_out:=innings-not_outs;
+if(times_out =0) then
+times_out:=1;
+end if;
+batting_average := runs_scored / times_out;
+  RETURN batting_average;
+END BATTING_AVERAGE_CALC;
 
+--function
+--2
+create or replace FUNCTION BOWLING_AVERAGE_CALC (runs_conceded number,wickets number)
+RETURN NUMBER AS 
+bowling_average number;
+BEGIN
+bowling_average := runs_conceded/wickets;
+  RETURN bowling_average;
+END BOWLING_AVERAGE_CALC;
+
+--trigger
+--1
+create or replace TRIGGER TR_UPDATE_REMAINING_BALANCE 
+BEFORE INSERT ON TEAMPLAYER 
+FOR EACH ROW 
+BEGIN
+  UPDATE TEAM set amount_remaining = amount_remaining - :new.sold_price where team_id = :new.teamm_id;
+  
+END;
