@@ -15,14 +15,11 @@ body {
 	background-size: 100% 100%;
 }
 body {font-family: Arial, Helvetica, sans-serif;}
-
 </style>
 <body>
  	<form action="FindRolee.jsp" accept="image/gif,image/jpeg"><pre>
 	<h2>Find Player by Role</h2>
 	<p>Enter role to find player</p>
-	 <label for="rname">Choose a team to view:</label>
-
 <select name="rname">
   <option value="batsman">batsman</option>
   <option value="bowler">bowler</option>
