@@ -3,6 +3,7 @@ package com.playingeleven;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.TimeZone;
 
 import logger.Logger;
 
@@ -30,6 +31,8 @@ public class DbConnection {
 	
 	public static Connection getConnection() throws SQLException {
 
+		TimeZone timeZone = TimeZone.getTimeZone("Asia/Kolkata");
+		TimeZone.setDefault(timeZone);
 		Connection connection = null;
 		try {
 			String server = "13.235.147.120";
