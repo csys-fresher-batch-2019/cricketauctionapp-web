@@ -20,13 +20,19 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <body>
  	<form action="FindRolee.jsp" accept="image/gif,image/jpeg"><pre>
 	<h2>Find Player by Role</h2>
-	<p>Enter role to find players 1.batsman 2.bowler 3.all-rounder 4.wicketkeeper/batsman</p>
-   Role name:               <input type="text" name="rname" placeholder="batsman"><br>
-  	
-		
-		                                                                     <input type="submit" value="Submit">
+	<p>Enter role to find player</p>
+	 <label for="rname">Choose a team to view:</label>
+
+<select name="rname">
+  <option value="batsman">batsman</option>
+  <option value="bowler">bowler</option>
+  <option value="all-rounder">all-rounder</option>
+  <option value="wicketkeeper/batsman">wicketkeeper/batsman</option>
+</select>
+  	<input type="submit" value="Submit"/>
 		     
-	</pre>
-	</form>
-</body>
-</html>
+	
+  </pre>
+  </form>
+  </body>
+  </html>
