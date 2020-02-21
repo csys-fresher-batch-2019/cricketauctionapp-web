@@ -138,13 +138,70 @@ to {
 		width: 100%;
 	}
 }
+
+.topnav {
+	overflow: hidden;
+	background-color: black;
+}
+.topnav a {
+	float: left;
+	color: #ffffff;
+	text-align: center;
+	padding: 16px 16px;
+	text-decoration: none;
+	font-size: 17px;
+	display: inline-block;
+	vertical-align: middle;
+	content: "";
+	background:;
+	background-size: 100% 100%;
+	align-items: center;
+}
+.topnav a:hover {
+	background-color: #blue;
+	color: red;
+}
+.topnav a.active {
+	background: url('assets/images/login.png');
+	color: white;
+	padding: 5px 15px, 5px;
+	border-radius: 20px;
+}
+.topnav a.right {
+	float: right;
+}
+.orange {
+	color: #ed6c0d;
+	cursor: pointer !important;
+}
+.white {
+	color: #ffffff;
+	cursor: pointer !important;
+}
+.right {
+	float: right;
+}
 </style>
 </head>
 <body>
+	<div class="topnav">
+		<a class="active" href="">CRICKETAUCTION</a>
+					
+				<button class="right" onclick="document.getElementById('id01').style.display='block'" 
+		style="width: auto;">LOGIN</button>
+<a href="BestBat.jsp">BEST BATSMAN</a>
+  <a href="BestBowl.jsp">BEST BOWLER</a>
+  <a href="FindRole.jsp">FIND ROLE</a>
+  <a href="ExperiencePlayers.jsp">EXPERIENCE PLAYERS</a>
+  <a href="TeamPlayer.jsp">TEAM PLAYERS</a>
+								</div>
+	<div style="padding-left: 16px">
+		<h2></h2>
+		<p></p>
+	</div>
 
 	<img src="assets/images/ipl002.jpg" width="1350" height="550">
-	<button onclick="document.getElementById('id01').style.display='block'"
-		style="width: auto;">Login</button>
+	
 
 	<div id="id01" class="modal">
 
