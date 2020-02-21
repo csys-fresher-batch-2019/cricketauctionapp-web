@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.playingeleven.Login;
 @WebServlet("/Register")
-
 public class Register extends HttpServlet {
-	
-   
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
 		String name=request.getParameter("uname");
 		String password=request.getParameter("psw");
@@ -25,9 +22,6 @@ public class Register extends HttpServlet {
 			response.sendRedirect("admin.jsp");
 		}
 		else
-			response.sendRedirect("user.jsp");
+			response.sendRedirect("index.jsp");
 	}
-
-	
-
 }
