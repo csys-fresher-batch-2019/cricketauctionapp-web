@@ -439,12 +439,12 @@ body {
 </div>
 
 <div class="navbar">
-  <a href="http://localhost:8090/cricket/BestBat.jsp">BEST BATSMAN</a>
-  <a href="http://localhost:8090/cricket/BestBowl.jsp">BEST BOWLER</a>
-  <a href="http://localhost:8090/cricket/FindRole.jsp">FIND ROLE</a>
-  <a href="http://localhost:8090/cricket/ExperiencePlayers.jsp">EXPERIENCE PLAYERS</a>
-  <a href="http://localhost:8090/cricket/TeamPlayer.jsp">TEAM PLAYERS</a>
-  <a href="http://localhost:8090/cricket/index.jsp" class="right">LOG OUT</a>
+  <a href="cricket/BestBat.jsp">BEST BATSMAN</a>
+  <a href="cricket/BestBowl.jsp">BEST BOWLER</a>
+  <a href="cricket/FindRole.jsp">FIND ROLE</a>
+  <a href="ExperiencePlayers.jsp">EXPERIENCE PLAYERS</a>
+  <a href="TeamPlayer.jsp">TEAM PLAYERS</a>
+  <a href="index.jsp" class="right">LOG OUT</a>
 </div>
 
 

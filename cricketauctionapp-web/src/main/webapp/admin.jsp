@@ -121,12 +121,12 @@ body {
 </div>
 
 <div class="navbar">
-  <a href="http://localhost:8090/cricket/InsertPlayer.jsp">ADD PLAYER</a>
-  <a href="http://localhost:8090/cricket/InsertTeam.jsp">ADD TEAM</a>
-  <a href="http://localhost:8090/cricket/UpdateCareer.jsp">UPDATE PLAYER</a>
-  <a href="http://localhost:8090/cricket/BidPlayer.jsp">BID</a>
-  <a href="http://localhost:8090/cricket/TeamPlayer.jsp">TEAM PLAYERS</a>
-  <a href="http://localhost:8090/cricket/index.jsp" class="right">LOG OUT</a>
+  <a href="InsertPlayer.jsp">ADD PLAYER</a>
+  <a href="InsertTeam.jsp">ADD TEAM</a>
+  <a href="UpdateCareer.jsp">UPDATE PLAYER</a>
+  <a href="BidPlayer.jsp">BID</a>
+  <a href="TeamPlayer.jsp">TEAM PLAYERS</a>
+  <a href="index.jsp" class="right">LOG OUT</a>
 </div>
 
 </body>
