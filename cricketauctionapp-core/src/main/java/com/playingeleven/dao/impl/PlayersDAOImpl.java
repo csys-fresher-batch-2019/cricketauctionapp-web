@@ -1,5 +1,6 @@
 package com.playingeleven.dao.impl;
 
+import java.io.BufferedReader;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -112,6 +113,47 @@ public class PlayersDAOImpl implements PlayersDAO {
 				
        return Experience;
 
+	}
+
+	public List<Players> searchPlayers(String playerName) throws DbException {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		String sql="select * from players where player_fullname LIKE ?";
+		List<Players> lp=new ArrayList<Players>() ;
+		
+		try(Connection con = DbConnection.getConnection();
+				PreparedStatement stmt = con.prepareStatement(sql);)
+		{
+			stmt.setString(1, capitalize(playerName)+"%");
+				try(ResultSet rs = stmt.executeQuery();)
+				{
+				while (rs.next()) {
+					Players p=new Players();
+				
+					p.setPlayerId(rs.getInt(1));
+					p.setPlayerFullName(rs.getString(2));
+					p.setRoleName(rs.getString(5));
+					p.setPlayerImage(rs.getString(6));
+					lp.add(p);
+					
+					
+				}
+	}
+		}
+			catch(SQLException e)
+			{
+				log.error(e);
+			}
+					
+	       return(lp) ;
+	}
+	public static String capitalize(String str)
+	{
+	    if(str == null) return str;
+	    return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 
 }

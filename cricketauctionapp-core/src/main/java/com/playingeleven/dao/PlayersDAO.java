@@ -17,5 +17,9 @@ public interface PlayersDAO {
 	public List<Players> listRoleOfPlayers(String roleName) throws DbException;
 
 	public ArrayList<Experience> listOfExperiencedPlayers() throws DbException;
+	
+	public List<Players> searchPlayers(String playerName) throws DbException;
+
+	
 
 }
