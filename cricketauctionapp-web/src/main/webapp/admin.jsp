@@ -109,6 +109,9 @@ body {
     width: 100%;
   }
 }
+.move{
+float:right;
+}
 </style>
 
 </head>
@@ -126,10 +129,10 @@ body {
   <a href="UpdateCareer.jsp">UPDATE PLAYER</a>
   <a href="BidPlayer.jsp">BID</a>
   <a href="TeamPlayer.jsp">TEAM PLAYERS</a>
-  <form class="form-inline" action="Search.jsp">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
-    </form>
   <a href="index.jsp" class="right">LOG OUT</a>
+  <form class="form-inline" action="Search.jsp">
+      <input class="right" type="text" placeholder="Search" aria-label="Search" name="search">
+   </form>
 </div>
 
 </body>
