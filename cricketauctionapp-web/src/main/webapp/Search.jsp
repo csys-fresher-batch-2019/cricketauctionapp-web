@@ -44,9 +44,12 @@ th, td {
 <%
 PlayersDAOImpl p=new PlayersDAOImpl();
 List<Players> lp=new ArrayList<Players>();
-lp=p.searchPlayers(request.getParameter("Search"));
+String s=request.getParameter("search"); 
+out.print(s);
+lp=p.searchPlayers(s);
 for(Players p1:lp)
  {
+	
 	%>	<tr>
 	<td><img src="assets/images/<%=p1.getPlayerImage()%>" height='196px' width='160px' ></img></td>
 			<td><%=p1.getPlayerFullName() %></td>
