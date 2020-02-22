@@ -45,7 +45,6 @@ th, td {
 PlayersDAOImpl p=new PlayersDAOImpl();
 List<Players> lp=new ArrayList<Players>();
 String s=request.getParameter("search"); 
-out.print(s);
 lp=p.searchPlayers(s);
 for(Players p1:lp)
  {
