@@ -109,10 +109,13 @@ body {
     width: 100%;
   }
 }
-.move{
+.left{
 float:right;
+padding-left:60px;
+position:absolute;
+top:368px;
+left:1000px;
 }
-
 </style>
 
 </head>
@@ -132,7 +135,7 @@ float:right;
   <a href="TeamPlayer.jsp">TEAM PLAYERS</a>
   <a href="index.jsp" class="right">LOG OUT</a>
   <form class="form-inline" action="Search.jsp">
-      <input class="move" type="text" placeholder="Search" aria-label="Search" name="search">
+      <input class="left" type="text" placeholder="Search" aria-label="Search" name="search">
    </form>
 </div>
 
