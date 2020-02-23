@@ -6,7 +6,17 @@ public class Experience {
 	private int matches;
 	private String playerImage;
 	private int playerId;
+	private String roleName;
 	
+
+	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
 	public int getPlayerId() {
 		return playerId;

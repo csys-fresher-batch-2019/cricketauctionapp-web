@@ -77,7 +77,7 @@ public void deletePlayerDetails(LocalDate dateOfBirth) throws DbException {
 		}
 public ArrayList<Experience> listOfExperiencedPlayers() throws DbException {
             ArrayList<Experience> Experience = new ArrayList<Experience>();
-	        String sql = "select players.player_image as player_image,players.player_fullname as player_fullname,career.matches as matches,players.player_id as playerId from players inner join career on player_id=career_no where active=1 order by matches desc";
+	        String sql = "select players.player_image as player_image,players.player_fullname as player_fullname,career.matches as matches,players.player_id as playerId,players.role_name as roleName from players inner join career on player_id=career_no where active=1 order by matches desc";
 			try(Connection con = DbConnection.getConnection();
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);){
@@ -87,11 +87,13 @@ public ArrayList<Experience> listOfExperiencedPlayers() throws DbException {
 				String playerFullName = rs.getString(2);
 				int matches = rs.getInt(3);
 				int playerId = rs.getInt(4);
+				String roleName = rs.getString(5);
                 com.playingeleven.dao.dto.Experience e = new Experience();
                 e.setPlayerImage(playerImage);
 				e.setPlayerFullName(playerFullName);
 				e.setMatches(matches);
 				e.setPlayerId(playerId);
+				e.setRoleName(roleName);
 				Experience.add(e);
 			}
 }

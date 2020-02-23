@@ -25,10 +25,11 @@ th, td {
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-<h2>Show players</h2>
+<h2>players</h2>
 <table><tr>
 <th>player</th>
 <th>Player Name</th>
+<th>Role Name
 <th>Matches</th>
 <th>Player Id</th>
 </tr>
@@ -39,6 +40,7 @@ ArrayList<Experience> ExperiencePlayers = impl.listOfExperiencedPlayers();
 for (Experience experience : ExperiencePlayers) {
 	%>	<tr><td><img src="assets/images/<%=experience.getPlayerImage()%>" height='196px' width='160px' ></img></td>
 	<td><%=experience.getPlayerFullName() %></td>
+    <td><%=experience.getRoleName() %></td>
 	<td><%=experience.getMatches() %></td>
 	<td><%=experience.getPlayerId() %></td>	
 </tr>
