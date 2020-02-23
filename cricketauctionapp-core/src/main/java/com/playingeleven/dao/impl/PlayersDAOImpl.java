@@ -1,6 +1,4 @@
 package com.playingeleven.dao.impl;
-
-import java.io.BufferedReader;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,15 +8,12 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.playingeleven.DbConnection;
 import com.playingeleven.DbException;
 import com.playingeleven.dao.PlayersDAO;
 import com.playingeleven.dao.dto.Experience;
 import com.playingeleven.model.Players;
-
 import logger.Logger;
-
 public class PlayersDAOImpl implements PlayersDAO {
 	private static final Logger log=Logger.getInstance(); 
 
@@ -41,8 +36,7 @@ public class PlayersDAOImpl implements PlayersDAO {
 			log.error(e);
 		}	
 	}
-
-	public void deletePlayerDetails(LocalDate dateOfBirth) throws DbException {
+public void deletePlayerDetails(LocalDate dateOfBirth) throws DbException {
 		String sql="UPDATE players  SET active=0  WHERE date_of_birth < ?";
 		
 		try(	Connection 		con = DbConnection.getConnection();
@@ -80,16 +74,10 @@ public class PlayersDAOImpl implements PlayersDAO {
 				log.error(e);
 			}
 		return list;
-		
-	}
-
-	public ArrayList<Experience> listOfExperiencedPlayers() throws DbException {
-
-	
-		ArrayList<Experience> Experience = new ArrayList<Experience>();
-	
-			
-			String sql = "select players.player_image as player_image,players.player_fullname as player_fullname,career.matches as matches from players inner join career on player_id=career_no where active=1 order by matches desc";
+		}
+public ArrayList<Experience> listOfExperiencedPlayers() throws DbException {
+            ArrayList<Experience> Experience = new ArrayList<Experience>();
+	        String sql = "select players.player_image as player_image,players.player_fullname as player_fullname,career.matches as matches,players.player_id as playerId from players inner join career on player_id=career_no where active=1 order by matches desc";
 			try(Connection con = DbConnection.getConnection();
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);){
@@ -98,15 +86,16 @@ public class PlayersDAOImpl implements PlayersDAO {
 				String playerImage=rs.getString(1);
 				String playerFullName = rs.getString(2);
 				int matches = rs.getInt(3);
+				int playerId = rs.getInt(4);
                 com.playingeleven.dao.dto.Experience e = new Experience();
-    
                 e.setPlayerImage(playerImage);
 				e.setPlayerFullName(playerFullName);
 				e.setMatches(matches);
+				e.setPlayerId(playerId);
 				Experience.add(e);
 			}
 }
-		catch(SQLException e)
+			catch(SQLException e)
 		{
 			log.error(e);
 		}
@@ -115,12 +104,7 @@ public class PlayersDAOImpl implements PlayersDAO {
 
 	}
 
-	public List<Players> searchPlayers(String playerName) throws DbException {
-		// TODO Auto-generated method stub
-		
-		
-		
-		
+	public List<Players> searchPlayers(String playerName) throws DbException {	
 		String sql="select * from players where player_fullname LIKE ?";
 		List<Players> lp=new ArrayList<Players>() ;
 		
@@ -139,8 +123,7 @@ public class PlayersDAOImpl implements PlayersDAO {
 					p.setPlayerImage(rs.getString(6));
 					lp.add(p);
 					
-					
-				}
+					}
 	}
 		}
 			catch(SQLException e)

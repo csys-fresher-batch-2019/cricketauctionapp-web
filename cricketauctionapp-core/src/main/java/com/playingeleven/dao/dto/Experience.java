@@ -5,44 +5,40 @@ public class Experience {
 	private String playerFullName;
 	private int matches;
 	private String playerImage;
+	private int playerId;
 	
-	
+
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
 
 	public String getPlayerImage() {
 		return playerImage;
 	}
 
-
-
 	public void setPlayerImage(String playerImage) {
 		this.playerImage = playerImage;
 	}
-
-
 
 	public String getPlayerFullName() {
 		return playerFullName;
 	}
 
-
-
 	public void setPlayerFullName(String playerFullName) {
 		this.playerFullName = playerFullName;
 	}
-
-
 
 	public int getMatches() {
 		return matches;
 	}
 
-
-
 	public void setMatches(int matches) {
 		this.matches = matches;
 	}
-
-
 
 	@Override
 	public String toString() {

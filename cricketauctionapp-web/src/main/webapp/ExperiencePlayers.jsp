@@ -25,7 +25,7 @@ th, td {
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-<h2>Show players Experience</h2>
+<h2>Show players</h2>
 <table><tr>
 <th>player</th>
 <th>Player Name</th>
