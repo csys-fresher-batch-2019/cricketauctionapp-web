@@ -129,9 +129,9 @@ left:1000px;
 
 <div class="navbar">
   <a href="InsertPlayer.jsp">ADD PLAYER</a>
-  <a href="InsertTeam.jsp">ADD TEAM</a>
-  <a href="ExperiencePlayers.jsp">PLAYERS</a>
+  <!--<a href="InsertTeam.jsp">ADD TEAM</a>-->
   <a href="UpdateCareer.jsp">UPDATE PLAYER</a>
+  <a href="ExperiencePlayers.jsp">PLAYERS</a>
   <a href="BidPlayer.jsp">BID</a>
   <a href="TeamPlayer.jsp">TEAM PLAYERS</a>
   <a href="index.jsp" class="right">LOG OUT</a>

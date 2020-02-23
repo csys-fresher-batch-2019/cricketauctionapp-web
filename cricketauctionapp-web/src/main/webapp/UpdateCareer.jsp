@@ -20,7 +20,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <body>
 	<form action="UpdateCareerr.jsp" accept="image/gif,image/jpeg"><pre>
 	<h2>Update Career details</h2>
-   Career:               <input type="number" name="cno"><br>
+   Career No:            <input type="number" name="cno"><br>
    Matches:              <input type="number" name="match"><br>
    Innings:              <input type="number" name="inn"><br> 
    Not outs:             <input type="number" name="nouts"><br> 
