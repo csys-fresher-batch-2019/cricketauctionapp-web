@@ -113,7 +113,7 @@ body {
 float:right;
 padding-left:60px;
 position:absolute;
-top:368px;
+top:53%;
 left:1000px;
 }
 </style>
