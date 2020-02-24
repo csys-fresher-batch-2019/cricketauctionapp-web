@@ -1,8 +1,6 @@
 package com.playingeleven;
-
-//import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,17 +12,19 @@ import com.playingeleven.model.Players;
 import logger.Logger;
 
 public class TestPlayer {
-	private static final Logger log=Logger.getInstance(); 
+	private static final Logger log = Logger.getInstance();
+	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) throws Exception {
+		
+		
 		int n;
-		Scanner sc = new Scanner(System.in);
-
 		do {
+			
 			log.getInput(
 					"\nTo choose your choice\npress 1 add to player details\npress 2 to remove player details\npress 3 to find players by rolename\npress 4 to show player experience\n press any other to exit");
 
 			log.getInput("\nEnter your choice no:");
-			n = sc.nextInt();
+			n = sc.nextInt(); 
 			switch (n) {
 			case 1:
 				log.getInput("Add player details");
@@ -46,13 +46,14 @@ public class TestPlayer {
 				log.getInput("Exit");
 				break;
 			case 6:
-				//log.getInput("Saturday");
+				// log.getInput("Saturday");
 				break;
 			default:
 				log.getInput("Invalid choice");
 				break;
 			}
 		} while (n <= 6);
+		sc.close();
 	}
 
 	public static void testInsert() throws Exception {
@@ -116,7 +117,7 @@ public class TestPlayer {
 		for (Experience experience : ExperiencePlayers) {
 			log.getInput("");
 			log.getInput(experience.getPlayerFullName() + "-" + experience.getMatches());
-		} 
+		}
 
 	}
 

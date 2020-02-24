@@ -8,7 +8,8 @@ import com.playingeleven.model.Career;
 import logger.Logger;
 
 public class TestCareer {
-	private static final Logger log=Logger.getInstance(); 
+	private static final Logger log = Logger.getInstance();
+
 	public static void main(String[] args) throws Exception {
 		testCareer();
 		testDelete();
@@ -46,8 +47,8 @@ public class TestCareer {
 		ob.setCatches(catches);
 		ob.setStumpings(stumpings);
 		CareerDAOImpl impl = new CareerDAOImpl();
-		impl.addCareerDetails(ob.getMatches(), ob.getInnings(), ob.getNotOuts(), ob.getRunsScored(), ob.getBallsBowled(), ob.getRunsConceded(),
-				ob.getWickets(), ob.getCatches(), ob.getStumpings());
+		impl.addCareerDetails(ob.getMatches(), ob.getInnings(), ob.getNotOuts(), ob.getRunsScored(),
+				ob.getBallsBowled(), ob.getRunsConceded(), ob.getWickets(), ob.getCatches(), ob.getStumpings());
 		s.close();
 	}
 
@@ -85,8 +86,9 @@ public class TestCareer {
 		ob.setCatches(catches);
 		ob.setStumpings(stumpings);
 		CareerDAOImpl impl = new CareerDAOImpl();
-		impl.updateCareerDetails(ob.getCareerNo(), ob.getCatches(), ob.getInnings(), ob.getNotOuts(), ob.getRunsScored(), ob.getBallsBowled(),
-				ob.getRunsConceded(), ob.getWickets(), ob.getCatches(), ob.getStumpings());
+		impl.updateCareerDetails(ob.getCareerNo(), ob.getCatches(), ob.getInnings(), ob.getNotOuts(),
+				ob.getRunsScored(), ob.getBallsBowled(), ob.getRunsConceded(), ob.getWickets(), ob.getCatches(),
+				ob.getStumpings());
 		s.close();
 	}
 

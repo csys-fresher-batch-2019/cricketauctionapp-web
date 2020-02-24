@@ -8,11 +8,12 @@ import com.playingeleven.model.Country;
 import logger.Logger;
 
 public class TestCountry {
-	private static final Logger log=Logger.getInstance(); 
+	private static final Logger log = Logger.getInstance();
 
 	public static void main(String[] args) throws Exception {
 		insertCountry();
-		}
+	}
+
 	public static void insertCountry() throws Exception {
 		Scanner sc = new Scanner(System.in);
 		log.getInput("Enter Country name");
@@ -21,12 +22,12 @@ public class TestCountry {
 		String playerType = sc.next();
 		log.getInput("Enter Basic prize of the player");
 		int basicPrice = sc.nextInt();
-	    Country ob = new Country();
-	    ob.setCountryName(countryName);
-	    ob.setPlayerType(playerType);
-	    ob.setBasicPrice(basicPrice);
-	    CountryDAOImpl impl = new CountryDAOImpl();
-		impl.addCountry(ob.getCountryName(),ob.getPlayerType(),ob.getBasicPrice());
+		Country ob = new Country();
+		ob.setCountryName(countryName);
+		ob.setPlayerType(playerType);
+		ob.setBasicPrice(basicPrice);
+		CountryDAOImpl impl = new CountryDAOImpl();
+		impl.addCountry(ob.getCountryName(), ob.getPlayerType(), ob.getBasicPrice());
 		sc.close();
 	}
 

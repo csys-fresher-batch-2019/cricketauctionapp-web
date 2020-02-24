@@ -1,12 +1,12 @@
 package com.playingeleven.dao.dto;
 
 public class TeamPlayerPlayers {
-	private String playerFullName; 
+	private String playerFullName;
 	private String roleName;
 	private String playerType;
-	private  int soldPrice;
+	private int soldPrice;
 	private String playerImage;
-	
+
 	public String getPlayerImage() {
 		return playerImage;
 	}
@@ -52,6 +52,5 @@ public class TeamPlayerPlayers {
 		return "TeamPlayerPlayers [playerFullName=" + playerFullName + ", roleName=" + roleName + ", playerType="
 				+ playerType + ", soldPrice=" + soldPrice + ", playerImage=" + playerImage + "]";
 	}
-	
 
 }

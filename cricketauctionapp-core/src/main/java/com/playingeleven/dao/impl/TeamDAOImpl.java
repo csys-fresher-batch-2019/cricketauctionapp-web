@@ -21,7 +21,7 @@ public class TeamDAOImpl implements TeamDAO {
 		String sql="insert into team (team_id,team_name,team_owner,team_coach,amount_remaining) values(team_id_sq.nextVal,?,?,?,?)";
 
 		try(Connection con = DbConnection.getConnection();
-						PreparedStatement stmt =con.prepareStatement(sql))
+			PreparedStatement stmt =con.prepareStatement(sql))
 		{
 			stmt.setString(1, teamName);
 			stmt.setString(2,teamOwner);

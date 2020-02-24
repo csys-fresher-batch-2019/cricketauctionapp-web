@@ -9,7 +9,7 @@ import java.util.Set;
 import logger.Logger;
 
 public class team_bid {
-	private static final Logger log=Logger.getInstance(); 
+	private static final Logger log = Logger.getInstance();
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -18,7 +18,7 @@ public class team_bid {
 		int n = 1;
 		int teamId;
 		log.getInput("round no" + n);
-        String[] teams = { "CSK", "MI", "RCB", "SRH", "KKR" };
+		String[] teams = { "CSK", "MI", "RCB", "SRH", "KKR" };
 		int[] teamIds = { 101, 102, 103, 104, 105 };
 		int selectedTeamId = 0;
 		Map<Integer, Integer> bid = new HashMap<Integer, Integer>();
@@ -30,28 +30,26 @@ public class team_bid {
 			boolean repeat = false;
 			int amount = 0;
 			do {
-				log.getInput(
-						"Team " + teamName + ", Enter the bidding Amount for playerid " + playerId + " at round no" + n);
-				
+				log.getInput("Team " + teamName + ", Enter the bidding Amount for playerid " + playerId + " at round no"
+						+ n);
+
 				amount = sc.nextInt();
 				if (amountSet.contains(amount)) {
 					repeat = true;
 					log.getInput("Reenter different Amount. Already someone has bidded.");
-				}
-				else{
+				} else {
 					amountSet.add(amount);
 					repeat = false;
 				}
-			}
-			while( repeat);
-			
+			} while (repeat);
+
 			if (amount > 0) {
 				bid.put(teaamId, amount);
 			}
-			if ( amount > max) {
+			if (amount > max) {
 				max = amount;
 				selectedTeamId = teaamId;
-			}		
+			}
 
 		}
 		log.getInput(bid);
@@ -63,10 +61,8 @@ public class team_bid {
 			// System.out.print( x );`
 		}
 		// int arr[] = {bid1, bid2,bid3, bid4, bid5};
-		//int max = 0;// bid. Arrays.stream(arr).max().getAsInt();
+		// int max = 0;// bid. Arrays.stream(arr).max().getAsInt();
 		log.getInput("TeamId " + selectedTeamId + ",highest bid is " + max);
 
 	}
 }
-
-

@@ -11,13 +11,13 @@ import com.playingeleven.model.Cricketing;
 import logger.Logger;
 
 public class TestCricketing {
-	private static final Logger log=Logger.getInstance(); 
+	private static final Logger log = Logger.getInstance();
 
 	public static void main(String[] args) throws Exception {
-		//testCricketing();
-		//testDelete();
+		// testCricketing();
+		// testDelete();
 		testBatAvg();
-		//testBowAvg();
+		// testBowAvg();
 	}
 
 	public static void testCricketing() throws Exception {
@@ -38,7 +38,7 @@ public class TestCricketing {
 		ob.setBowling(bowling);
 		ob.setBowlingSpeed(bowlingSpeed);
 		CricketingDAOImpl impl = new CricketingDAOImpl();
-		impl.addCricketingDetails(ob.getJerseyNo(),  ob.getBatting(), ob.getBowling(), ob.getBowlingSpeed());
+		impl.addCricketingDetails(ob.getJerseyNo(), ob.getBatting(), ob.getBowling(), ob.getBowlingSpeed());
 		s.close();
 	}
 
