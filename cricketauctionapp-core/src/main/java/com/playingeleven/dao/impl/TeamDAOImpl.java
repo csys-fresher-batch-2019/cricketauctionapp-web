@@ -15,7 +15,7 @@ import com.playingeleven.model.Team;
 
 import logger.Logger;
 
-public class TeamDAOImpl  implements TeamDAO {
+public class TeamDAOImpl implements TeamDAO {
 	private static final Logger log=Logger.getInstance(); 
 	public void addTeam(String teamName,String teamOwner,String teamCoach,int amountRemaining) throws DbException {
 		String sql="insert into team (team_id,team_name,team_owner,team_coach,amount_remaining) values(team_id_sq.nextVal,?,?,?,?)";
