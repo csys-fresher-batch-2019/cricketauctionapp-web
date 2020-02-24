@@ -3,6 +3,7 @@
 <body>
 <head>
 <title>Login page</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -216,7 +217,8 @@ to {
 				<label for="uname"><b>Username</b></label> <input type="text"
 					placeholder="Enter Username" name="uname" required> <label
 					for="psw"><b>Password</b></label> <input type="password"
-					placeholder="Enter Password" name="psw" required>
+					placeholder="Enter Password" name="psw" onkeypress="capLock(event)" required>
+<div id="divMayus" style="visibility:hidden;margin-top:15px;color:red;">Caps Lock is on.</div>
 
 				<button type="submit">Login</button>
 				<label> <input type="checkbox" checked="checked"
@@ -243,6 +245,14 @@ to {
 				modal.style.display = "none";
 			}
 		}
+		function capLock(e){
+ kc = e.keyCode?e.keyCode:e.which;
+ sk = e.shiftKey?e.shiftKey:((kc == 16)?true:false);
+ if(((kc >= 65 && kc <= 90) && !sk)||((kc >= 97 && kc <= 122) && sk))
+  document.getElementById('divMayus').style.visibility = 'visible';
+ else
+  document.getElementById('divMayus').style.visibility = 'hidden';
+}
 	</script>
 </body>
 </html>
