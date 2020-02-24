@@ -66,7 +66,7 @@ public class BidPlayerServlet extends HttpServlet {
 			i++;
 			
 		}
-		out.print("<html><body");
+		out.print("<html><body><h3>");
 		int id=0;
 		Set<Integer> keySet = bid.keySet();
 		for (int x : keySet) {
@@ -93,9 +93,9 @@ public class BidPlayerServlet extends HttpServlet {
 			 teamName=teams[4];
 		
 		
-out.print("<h3>"+selectedTeamId+);
+out.print(selectedTeamId);
 		
-		out.print("Team Name "+teamName+" highest bid is " + max+ "</h3></body></html>");
+		out.print("Team Name "+teamName+" highest bid is " + max);
 
 		TeamPlayerDAOImpl impl = new TeamPlayerDAOImpl();
 		try {
@@ -105,6 +105,6 @@ out.print("<h3>"+selectedTeamId+);
 			e.printStackTrace();
 		}
 		
-		
+		out.print("</h3></body></html>");
 			}
 }
