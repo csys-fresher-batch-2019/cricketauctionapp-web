@@ -60,7 +60,6 @@ for(Players p1:lp)
 			<td><%=p1.getPlayerFullName() %></td>
 			<td><%=p1.getRoleName() %></td>
 			<td><%=p1.getPlayerId() %></td>
-			<td><%=p1.getPlayerId()%></td>
 			<td><%=p1.getTeamName()%></td>
 			</tr>
 		<%} %>
