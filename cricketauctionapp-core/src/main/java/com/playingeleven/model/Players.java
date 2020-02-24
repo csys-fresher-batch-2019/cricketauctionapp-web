@@ -9,6 +9,15 @@ public class Players {
 	private String nickName;
 	private String roleName;
 	private String playerImage;
+	private String teamName;
+	public String getTeamName() {
+		return teamName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
 	public String getPlayerImage() {
 		return playerImage;
 	}
@@ -74,7 +83,8 @@ public class Players {
 	@Override
 	public String toString() {
 		return "Players [playerId=" + playerId + ", playerFullName=" + playerFullName + ", dateOfBirth=" + dateOfBirth
-				+ ", nickName=" + nickName + ", roleName=" + roleName + ", active=" + active + "]";
+				+ ", nickName=" + nickName + ", roleName=" + roleName + ", playerImage=" + playerImage + ", teamName="
+				+ teamName + ", active=" + active + "]";
 	}
 
 	public int getPlayerId() {

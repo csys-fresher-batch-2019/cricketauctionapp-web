@@ -40,20 +40,28 @@ th, td {
 <th>Player Name</th>
 <th>Role Name</th>
 <th>Player Id</th>
+<th>Sold to</th>
 </tr>
 <%
 PlayersDAOImpl p=new PlayersDAOImpl();
 List<Players> lp=new ArrayList<Players>();
 String s=request.getParameter("search"); 
 lp=p.searchPlayers(s);
+
 for(Players p1:lp)
  {
+	if(p1.getTeamName()==null)
+	 {
+		 p1.setTeamName("Not Sold");
+	 }
 	
 	%>	<tr>
 	<td><img src="assets/images/<%=p1.getPlayerImage()%>" height='196px' width='160px' ></img></td>
 			<td><%=p1.getPlayerFullName() %></td>
 			<td><%=p1.getRoleName() %></td>
 			<td><%=p1.getPlayerId() %></td>
+			<td><%=p1.getPlayerId()%></td>
+			<td><%=p1.getTeamName()%></td>
 			</tr>
 		<%} %>
 

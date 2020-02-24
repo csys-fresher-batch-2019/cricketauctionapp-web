@@ -107,13 +107,14 @@ public ArrayList<Experience> listOfExperiencedPlayers() throws DbException {
 	}
 
 	public List<Players> searchPlayers(String playerName) throws DbException {	
-		String sql="select * from players where player_fullname LIKE ?";
+		String sql="select * from players p where player_fullname LIKE ?";
+		String sql1="select team_name from team where team_id =(select teamm_id from teamplayer where playr_id =?)";
 		List<Players> lp=new ArrayList<Players>() ;
 		
 		try(Connection con = DbConnection.getConnection();
-				PreparedStatement stmt = con.prepareStatement(sql);)
+				PreparedStatement stmt = con.prepareStatement(sql);PreparedStatement stmt1=con.prepareStatement(sql1))
 		{
-			stmt.setString(1, capitalize(playerName)+"%");
+			stmt.setString(1, capitalize(playerName)+"%"); 
 				try(ResultSet rs = stmt.executeQuery();)
 				{
 				while (rs.next()) {
@@ -123,8 +124,19 @@ public ArrayList<Experience> listOfExperiencedPlayers() throws DbException {
 					p.setPlayerFullName(rs.getString(2));
 					p.setRoleName(rs.getString(5));
 					p.setPlayerImage(rs.getString(6));
-					lp.add(p);
 					
+					stmt1.setInt(1, p.getPlayerId());
+					try(ResultSet rs1 = stmt1.executeQuery();)
+					{
+					     if(rs1.next())
+					     {
+					    	  p.setTeamName(rs1.getString(1));
+					    	 
+					     }
+					}catch (Exception e) {
+						// TODO: handle exception
+					}
+					lp.add(p);
 					}
 	}
 		}
