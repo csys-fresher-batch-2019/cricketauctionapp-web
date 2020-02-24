@@ -39,9 +39,9 @@ public class PlayersDAOImpl implements PlayersDAO {
 public void deletePlayerDetails(LocalDate dateOfBirth) throws DbException {
 		String sql="UPDATE players  SET active=0  WHERE date_of_birth < ?";
 		
-		try(	Connection 		con = DbConnection.getConnection();
+		try(Connection 	con = DbConnection.getConnection();
 			
-			PreparedStatement pst = con.prepareStatement(sql);){
+			PreparedStatement pst = con.prepareStatement(sql)){
 			pst.setDate(1, Date.valueOf(dateOfBirth)); 
 			pst.executeUpdate();
 		}
@@ -55,19 +55,19 @@ public void deletePlayerDetails(LocalDate dateOfBirth) throws DbException {
 	
 		List<Players> list = new ArrayList<Players>();
 		String sql = "select player_id,player_image,player_fullname from players where lower(role_name)=lower('" + roleName + "') and active =1";
-		try
-		(
-			Connection con = DbConnection.getConnection();
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);){
-			while (rs.next()) {
-				Players p = new Players();
-				p.setPlayerId(rs.getInt("player_id"));
-				p.setPlayerImage(rs.getString("player_image"));
-				p.setPlayerFullName(rs.getString("player_fullname"));
-				list.add(p);
-			
-		}
+		try(Connection con = DbConnection.getConnection();
+			PreparedStatement pst = con.prepareStatement(sql))
+		{
+			try(ResultSet rs = pst.executeQuery())
+			{
+				while (rs.next()) {
+					Players p = new Players();
+					p.setPlayerId(rs.getInt("player_id"));
+					p.setPlayerImage(rs.getString("player_image"));
+					p.setPlayerFullName(rs.getString("player_fullname"));
+					list.add(p);		
+			}
+			}
 		}
 			catch(SQLException e)
 			{
@@ -79,23 +79,28 @@ public ArrayList<Experience> listOfExperiencedPlayers() throws DbException {
             ArrayList<Experience> Experience = new ArrayList<Experience>();
 	        String sql = "select players.player_image as player_image,players.player_fullname as player_fullname,career.matches as matches,players.player_id as playerId,players.role_name as roleName from players inner join career on player_id=career_no where active=1 order by matches desc";
 			try(Connection con = DbConnection.getConnection();
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);){
+			PreparedStatement pst = con.prepareStatement(sql);)
+					{
+						try(ResultSet rs = pst.executeQuery())
+						{
+							while (rs.next()) {
+								String playerImage=rs.getString(1);
+								String playerFullName = rs.getString(2);
+								int matches = rs.getInt(3);
+								int playerId = rs.getInt(4);
+								String roleName = rs.getString(5);
+				                com.playingeleven.dao.dto.Experience e = new Experience();
+				                e.setPlayerImage(playerImage);
+								e.setPlayerFullName(playerFullName);
+								e.setMatches(matches);
+								e.setPlayerId(playerId);
+								e.setRoleName(roleName);
+								Experience.add(e);
+							}
+					}
 			
-			while (rs.next()) {
-				String playerImage=rs.getString(1);
-				String playerFullName = rs.getString(2);
-				int matches = rs.getInt(3);
-				int playerId = rs.getInt(4);
-				String roleName = rs.getString(5);
-                com.playingeleven.dao.dto.Experience e = new Experience();
-                e.setPlayerImage(playerImage);
-				e.setPlayerFullName(playerFullName);
-				e.setMatches(matches);
-				e.setPlayerId(playerId);
-				e.setRoleName(roleName);
-				Experience.add(e);
-			}
+			
+			
 }
 			catch(SQLException e)
 		{
@@ -112,7 +117,8 @@ public ArrayList<Experience> listOfExperiencedPlayers() throws DbException {
 		List<Players> lp=new ArrayList<Players>() ;
 		
 		try(Connection con = DbConnection.getConnection();
-				PreparedStatement stmt = con.prepareStatement(sql);PreparedStatement stmt1=con.prepareStatement(sql1))
+				PreparedStatement stmt = con.prepareStatement(sql);
+						PreparedStatement stmt1=con.prepareStatement(sql1))
 		{
 			stmt.setString(1, capitalize(playerName)+"%"); 
 				try(ResultSet rs = stmt.executeQuery();)

@@ -1,6 +1,7 @@
 package com.playingeleven.dao.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 import com.playingeleven.DbConnection;
@@ -15,8 +16,8 @@ public class CountryDAOImpl {
 		String sql="insert into country (playerr_id,country_name,player_type,basic_price) values(playerr_id_sq.nextVal,'"+countryName+"','"+playerType+"','"+basicPrice+"')";
 
 		try(	Connection con = DbConnection.getConnection();
-			Statement stmt = con.createStatement();){
-			stmt.executeUpdate(sql);
+			PreparedStatement pst = con.prepareStatement(sql)){
+			pst.executeUpdate();
 		}
 		catch(Exception e)
 		{

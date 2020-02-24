@@ -1,6 +1,7 @@
 package com.playingeleven.dao.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,11 +20,15 @@ public class CricketingDAOImpl implements CricketingDAO {
     public void addCricketingDetails(int jerseyNo,String batting, String bowling,
 			String bowlingSpeed) throws DbException 
 	{
-		String sql = "insert into cricketing(cric_no,jersey_no,batting,bowling,bowling_speed)values(cric_no_sq.nextval,'" + jerseyNo + "','" + batting + "','" + bowling + "','"+ bowlingSpeed + "')";
+		String sql = "insert into cricketing(cric_no,jersey_no,batting,bowling,bowling_speed)values(cric_no_sq.nextval,?,?,?,?)";
 		
   		try(	Connection	con = DbConnection.getConnection();
-			Statement stmt = con.createStatement();){
-			stmt.executeUpdate(sql);
+			PreparedStatement pst = con.prepareStatement(sql)){
+  			pst.setInt(1, jerseyNo);
+  			pst.setString(2, batting);
+  			pst.setString(3, bowling);
+  			pst.setString(4, bowlingSpeed);
+			pst.executeUpdate();
 			
 		}
 		catch(Exception e)
@@ -34,12 +39,12 @@ public class CricketingDAOImpl implements CricketingDAO {
 
 	public void deleteCricketingDetails(int cricNo) throws DbException {
 		
-		String sql = "DELETE FROM cricketing WHERE cric_no='" + cricNo + "'";
+		String sql = "DELETE FROM cricketing WHERE cric_no=?";
 		
 		try(	Connection con = DbConnection.getConnection();
 
-			Statement 	stmt = con.createStatement();){
-			 stmt.executeUpdate(sql);
+			PreparedStatement 	pst = con.prepareStatement(sql)){
+			 pst.executeUpdate();
 	}
 		catch(Exception e)
 		{
@@ -51,25 +56,30 @@ public class CricketingDAOImpl implements CricketingDAO {
 	{
 		ArrayList<Batting> Batting = new ArrayList<Batting>();
 		String sql = "select * from ( select p.player_image,p.player_fullname as player_fullname,p.role_name as role_name,r.batting as batting,round(BATTING_AVERAGE_CALC(runs_scored, not_outs,innings),2)as batting_average, rank() over (order by round(BATTING_AVERAGE_CALC(runs_scored,not_outs,innings)) desc) as rank from players p, career c,cricketing r where p.player_id = c.career_no and p.player_id=r.cric_no and  (role_name IN('batsman','wicketkeeper/Batsman')) and active=1) ";
-		try(Connection con = DbConnection.getConnection();Statement stmt = con.createStatement();ResultSet rs = stmt.executeQuery(sql);){
-while (rs.next()) {
-	String playerImage=rs.getString("player_image");
-				String playerFullName = rs.getString("player_fullname");
-				String roleName = rs.getString("role_name");
-				String batting = rs.getString("batting");
-				int battingAverage = rs.getInt("batting_average");
-				int rank = rs.getInt("rank");
-	            com.playingeleven.dao.dto.Batting b = new Batting();
-	            b.setPlayerImage(playerImage);
-				b.setPlayerFullName(playerFullName);
-				b.setRoleName(roleName);
-				b.setBatting(batting);
-				b.setBattingAverage(battingAverage);
-				b.setRank(rank);
-				Batting.add(b);
-		
+		try(Connection con = DbConnection.getConnection();
+				PreparedStatement pst =con.prepareStatement(sql)){
+			try(ResultSet rs = pst.executeQuery())
+			{
+				while (rs.next()) {
+					String playerImage=rs.getString("player_image");
+					String playerFullName = rs.getString("player_fullname");
+					String roleName = rs.getString("role_name");
+					String batting = rs.getString("batting");
+					int battingAverage = rs.getInt("batting_average");
+					int rank = rs.getInt("rank");
+		            com.playingeleven.dao.dto.Batting b = new Batting();
+		            b.setPlayerImage(playerImage);
+					b.setPlayerFullName(playerFullName);
+					b.setRoleName(roleName);
+					b.setBatting(batting);
+					b.setBattingAverage(battingAverage);
+					b.setRank(rank);
+					Batting.add(b);
+			
+				}
+			
 			}
-			}
+				}
 	catch (SQLException e) {
 		log.error(e);
 	}
@@ -78,22 +88,27 @@ while (rs.next()) {
 public ArrayList<Bowling> bestBowlingAverage() throws DbException {
 		ArrayList<Bowling> Bowling = new ArrayList<Bowling>();
 		String sql = "select * from ( select p.player_image,p.player_fullname,p.role_name,r.bowling,r.bowling_speed,round(BOWLING_AVERAGE_CALC (runs_conceded,wickets),2) as bowling_average, rank() over (order by round(BOWLING_AVERAGE_CALC(runs_conceded,wickets)) asc) as rank from players p, career c,cricketing r where p.player_id = c.career_no and p.player_id=r.cric_no and role_name='bowler' and active=1  )";
-			try(Connection con = DbConnection.getConnection();Statement stmt = con.createStatement();ResultSet rs = stmt.executeQuery(sql);){
-				while (rs.next()) {
-					String playerImage=rs.getString("player_image");
-				String playerFullName = rs.getString("player_fullname");
-				String roleName = rs.getString("role_name");
-				String bowling = rs.getString("bowling");
-				int bowlingAverage = rs.getInt("bowling_average");
-				int rank = rs.getInt("rank");
-				com.playingeleven.dao.dto.Bowling bo = new Bowling();
-				bo.setPlayerImage(playerImage);
-				bo.setPlayerFullName(playerFullName);
-				bo.setRoleName(roleName);
-				bo.setBowling(bowling);
-				bo.setBowlingAverage(bowlingAverage);
-				bo.setRank(rank);
-				Bowling.add(bo);
+			try(Connection con = DbConnection.getConnection();
+					PreparedStatement pst = con.prepareStatement(sql)){
+				try(ResultSet rs = pst.executeQuery())
+				{
+					while (rs.next()) {
+						String playerImage=rs.getString("player_image");
+					String playerFullName = rs.getString("player_fullname");
+					String roleName = rs.getString("role_name");
+					String bowling = rs.getString("bowling");
+					int bowlingAverage = rs.getInt("bowling_average");
+					int rank = rs.getInt("rank");
+					com.playingeleven.dao.dto.Bowling bo = new Bowling();
+					bo.setPlayerImage(playerImage);
+					bo.setPlayerFullName(playerFullName);
+					bo.setRoleName(roleName);
+					bo.setBowling(bowling);
+					bo.setBowlingAverage(bowlingAverage);
+					bo.setRank(rank);
+					Bowling.add(bo);
+				}
+				
 			}
 		}
 		catch (SQLException e) {
