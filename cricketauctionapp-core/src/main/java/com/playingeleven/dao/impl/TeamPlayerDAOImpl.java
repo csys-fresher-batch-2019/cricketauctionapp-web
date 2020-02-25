@@ -23,21 +23,22 @@ public class TeamPlayerDAOImpl {
 			pst.setInt(1, playrId);
 			pst.setInt(2, teammId);
 			pst.setInt(3, soldPrice);
-			pst.executeUpdate(sql);
+			pst.executeUpdate();
 		}
 
-		catch (Exception e) {
+		catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to add teamplayer details");
 		}
 	}
 
 	public ArrayList<TeamPlayerPlayers> viewTeamPlayer(String teamName) throws DbException, SQLException {
 
 		ArrayList<TeamPlayerPlayers> TeamPlayerPlayers = new ArrayList<TeamPlayerPlayers>();
-		String sql = "select p.player_image,p.player_fullname,p.role_name,o.player_type,tp.sold_price from players p,country o,teamplayer tp,team t where player_id=playerr_id and playr_id=player_id and team_id = teamm_id and team_name='"
-				+ teamName + "'";
+		String sql = "select p.player_image,p.player_fullname,p.role_name,o.player_type,tp.sold_price from players p,country o,teamplayer tp,team t where player_id=playerr_id and playr_id=player_id and team_id = teamm_id and team_name=?";
 		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
-			try (ResultSet rs = pst.executeQuery(sql)) {
+			pst.setString(1, teamName);
+			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
 					String playerImage = rs.getString("player_image");
 					String playerFullName = rs.getString("player_fullname");
@@ -56,6 +57,7 @@ public class TeamPlayerDAOImpl {
 
 			catch (SQLException e) {
 				log.error(e);
+				throw new DbException("unable to list team player details");
 			}
 
 			return TeamPlayerPlayers;

@@ -67,6 +67,7 @@ public class CareerDAOImpl implements CareerDAO {
 			pst.setInt(8, catches);
 			pst.setInt(9, catches);
 			pst.setInt(10, stumpings);
+			pst.setInt(11, careerNo);
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			log.error(e);
