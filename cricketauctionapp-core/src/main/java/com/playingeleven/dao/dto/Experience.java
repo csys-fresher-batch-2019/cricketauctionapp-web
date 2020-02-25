@@ -7,9 +7,7 @@ public class Experience {
 	private String playerImage;
 	private int playerId;
 	private String roleName;
-	
 
-	
 	public String getRoleName() {
 		return roleName;
 	}

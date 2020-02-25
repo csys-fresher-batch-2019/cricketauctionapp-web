@@ -16,84 +16,74 @@ import com.playingeleven.dao.dto.Bowling;
 import logger.Logger;
 
 public class CricketingDAOImpl implements CricketingDAO {
-	private static final Logger log=Logger.getInstance(); 
-    public void addCricketingDetails(int jerseyNo,String batting, String bowling,
-			String bowlingSpeed) throws DbException 
-	{
+	private static final Logger log = Logger.getInstance();
+
+	public void addCricketingDetails(int jerseyNo, String batting, String bowling, String bowlingSpeed)
+			throws DbException {
 		String sql = "insert into cricketing(cric_no,jersey_no,batting,bowling,bowling_speed)values(cric_no_sq.nextval,?,?,?,?)";
-		
-  		try(	Connection	con = DbConnection.getConnection();
-			PreparedStatement pst = con.prepareStatement(sql)){
-  			pst.setInt(1, jerseyNo);
-  			pst.setString(2, batting);
-  			pst.setString(3, bowling);
-  			pst.setString(4, bowlingSpeed);
+
+		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+			pst.setInt(1, jerseyNo);
+			pst.setString(2, batting);
+			pst.setString(3, bowling);
+			pst.setString(4, bowlingSpeed);
 			pst.executeUpdate();
-			
-		}
-		catch(Exception e)
-		{
+
+		} catch (Exception e) {
 			log.error(e);
 		}
 	}
 
 	public void deleteCricketingDetails(int cricNo) throws DbException {
-		
-		String sql = "DELETE FROM cricketing WHERE cric_no=?";
-		
-		try(	Connection con = DbConnection.getConnection();
 
-			PreparedStatement 	pst = con.prepareStatement(sql)){
-			 pst.executeUpdate();
-	}
-		catch(Exception e)
-		{
+		String sql = "DELETE FROM cricketing WHERE cric_no=?";
+
+		try (Connection con = DbConnection.getConnection();
+
+				PreparedStatement pst = con.prepareStatement(sql)) {
+			pst.executeUpdate();
+		} catch (Exception e) {
 			log.error(e);
 		}
-}
+	}
 
-	public ArrayList<Batting> bestBattingAverage() throws DbException 
-	{
+	public ArrayList<Batting> bestBattingAverage() throws DbException {
 		ArrayList<Batting> Batting = new ArrayList<Batting>();
 		String sql = "select * from ( select p.player_image,p.player_fullname as player_fullname,p.role_name as role_name,r.batting as batting,round(BATTING_AVERAGE_CALC(runs_scored, not_outs,innings),2)as batting_average, rank() over (order by round(BATTING_AVERAGE_CALC(runs_scored,not_outs,innings)) desc) as rank from players p, career c,cricketing r where p.player_id = c.career_no and p.player_id=r.cric_no and  (role_name IN('batsman','wicketkeeper/Batsman')) and active=1) ";
-		try(Connection con = DbConnection.getConnection();
-				PreparedStatement pst =con.prepareStatement(sql)){
-			try(ResultSet rs = pst.executeQuery())
-			{
+		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					String playerImage=rs.getString("player_image");
+					String playerImage = rs.getString("player_image");
 					String playerFullName = rs.getString("player_fullname");
 					String roleName = rs.getString("role_name");
 					String batting = rs.getString("batting");
 					int battingAverage = rs.getInt("batting_average");
 					int rank = rs.getInt("rank");
-		            com.playingeleven.dao.dto.Batting b = new Batting();
-		            b.setPlayerImage(playerImage);
+					com.playingeleven.dao.dto.Batting b = new Batting();
+					b.setPlayerImage(playerImage);
 					b.setPlayerFullName(playerFullName);
 					b.setRoleName(roleName);
 					b.setBatting(batting);
 					b.setBattingAverage(battingAverage);
 					b.setRank(rank);
 					Batting.add(b);
-			
+
 				}
-			
+
 			}
-				}
-	catch (SQLException e) {
-		log.error(e);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return Batting;
 	}
-			return Batting;
-			}
-public ArrayList<Bowling> bestBowlingAverage() throws DbException {
+
+	public ArrayList<Bowling> bestBowlingAverage() throws DbException {
 		ArrayList<Bowling> Bowling = new ArrayList<Bowling>();
 		String sql = "select * from ( select p.player_image,p.player_fullname,p.role_name,r.bowling,r.bowling_speed,round(BOWLING_AVERAGE_CALC (runs_conceded,wickets),2) as bowling_average, rank() over (order by round(BOWLING_AVERAGE_CALC(runs_conceded,wickets)) asc) as rank from players p, career c,cricketing r where p.player_id = c.career_no and p.player_id=r.cric_no and role_name='bowler' and active=1  )";
-			try(Connection con = DbConnection.getConnection();
-					PreparedStatement pst = con.prepareStatement(sql)){
-				try(ResultSet rs = pst.executeQuery())
-				{
-					while (rs.next()) {
-						String playerImage=rs.getString("player_image");
+		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					String playerImage = rs.getString("player_image");
 					String playerFullName = rs.getString("player_fullname");
 					String roleName = rs.getString("role_name");
 					String bowling = rs.getString("bowling");
@@ -108,10 +98,9 @@ public ArrayList<Bowling> bestBowlingAverage() throws DbException {
 					bo.setRank(rank);
 					Bowling.add(bo);
 				}
-				
+
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error(e);
 		}
 		return Bowling;
