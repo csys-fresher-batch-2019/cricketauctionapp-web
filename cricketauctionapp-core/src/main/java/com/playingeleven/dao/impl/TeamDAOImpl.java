@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.playingeleven.DbConnection;
 import com.playingeleven.DbException;
@@ -26,8 +25,9 @@ public class TeamDAOImpl implements TeamDAO {
 			stmt.setString(3, teamCoach);
 			stmt.setInt(4, amountRemaining);
 			stmt.executeUpdate(sql);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to add team details");
 		}
 	}
 
@@ -51,7 +51,8 @@ public class TeamDAOImpl implements TeamDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
+			throw new DbException("unable to view team player details");
 		}
 		return l;
 	}

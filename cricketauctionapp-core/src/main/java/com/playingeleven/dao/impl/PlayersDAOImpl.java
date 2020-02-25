@@ -5,15 +5,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.playingeleven.DbConnection;
 import com.playingeleven.DbException;
 import com.playingeleven.dao.PlayersDAO;
 import com.playingeleven.dao.dto.Experience;
 import com.playingeleven.model.Players;
+
 import logger.Logger;
 
 public class PlayersDAOImpl implements PlayersDAO {
@@ -29,8 +30,9 @@ public class PlayersDAOImpl implements PlayersDAO {
 			pst.setString(4, player.getRoleName());
 			pst.setString(5, player.getPlayerImage());
 			pst.executeUpdate();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to add player details");
 		}
 	}
 
@@ -42,8 +44,9 @@ public class PlayersDAOImpl implements PlayersDAO {
 				PreparedStatement pst = con.prepareStatement(sql)) {
 			pst.setDate(1, Date.valueOf(dateOfBirth));
 			pst.executeUpdate();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to delete player details");
 		}
 	}
 
@@ -64,6 +67,7 @@ public class PlayersDAOImpl implements PlayersDAO {
 			}
 		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to list role of player details");
 		}
 		return list;
 	}
@@ -91,6 +95,7 @@ public class PlayersDAOImpl implements PlayersDAO {
 
 		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to list experienced player details");
 		}
 
 		return Experience;
@@ -129,6 +134,7 @@ public class PlayersDAOImpl implements PlayersDAO {
 			}
 		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to show details");
 		}
 
 		return (lp);

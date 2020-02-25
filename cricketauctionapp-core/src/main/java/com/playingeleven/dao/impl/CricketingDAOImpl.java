@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.playingeleven.DbConnection;
@@ -29,8 +28,9 @@ public class CricketingDAOImpl implements CricketingDAO {
 			pst.setString(4, bowlingSpeed);
 			pst.executeUpdate();
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to add cricketing details");
 		}
 	}
 
@@ -42,8 +42,9 @@ public class CricketingDAOImpl implements CricketingDAO {
 
 				PreparedStatement pst = con.prepareStatement(sql)) {
 			pst.executeUpdate();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to remove cricketing details");
 		}
 	}
 
@@ -73,6 +74,7 @@ public class CricketingDAOImpl implements CricketingDAO {
 			}
 		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to show batting average details");
 		}
 		return Batting;
 	}
@@ -102,6 +104,7 @@ public class CricketingDAOImpl implements CricketingDAO {
 			}
 		} catch (SQLException e) {
 			log.error(e);
+			throw new DbException("unable to show bowling average details");
 		}
 		return Bowling;
 	}

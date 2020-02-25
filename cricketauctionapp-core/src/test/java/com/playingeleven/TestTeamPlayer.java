@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.playingeleven.dao.impl.PlayersDAOImpl;
-import com.playingeleven.dao.impl.TeamDAOImpl;
 import com.playingeleven.dao.impl.TeamPlayerDAOImpl;
 import com.playingeleven.model.Players;
 import com.playingeleven.model.TeamPlayer;
+
 import logger.Logger;
 public class TestTeamPlayer {
 	private static final Logger log = Logger.getInstance();
